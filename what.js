@@ -1,29 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
-  //let columns = Math.floor(document.body.clientWidth / 50),
-      //rows = Math.floor(document.body.clientHeight / 50);
+  //nav menu
+//const toggleNav = () => {
+  //document.body.dataset.nav = document.body.dataset.nav === "true" ? "false" : "true";
+//}
+
+const navToggle = document.querySelector('#nav-toggle');
+const mainNav = document.querySelector('#nav');
+
+navToggle.addEventListener('click', function() {
+  mainNav.classList.toggle('open');
+});
+  
+  
+  //cool background effect
   const wrapper = document.getElementById("tiles");
 
+  //create grid
   let columns = 0;
   let rows = 0;
 
+  //store colors
   const colors = [
-    "rgb(229, 57, 53)",
-    "rgb(253, 216, 53)",
-    "rgb(244, 81, 30)",
-    "rgb(76, 175, 80)",
+    "#A6A9C8",
+    "#D3D9E9",
+    "#554D74",
     "rgb(33, 150, 243)",
-    "rgb(156, 39, 176)",
+    "#e5e5e5",
+    "#018786",
   ];
   
   let count = -1;
 
+//animate background on click, index what color
   const handleOnClick = index => {
     count = count + 1;
 
 
     anime({
       targets: ".tile",
-      backgroundColor: colors[count % (Math.floor(Math.random() * 6))],
+      backgroundColor: colors[count % (colors.length - 1)],
       delay: anime.stagger(50, {
         grid: [columns, rows],
         from: index
@@ -66,6 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.onresize = () => createGrid();
   
+
+
+  //randomize letters on hover
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   document.querySelector("h1").onmouseover = event => {
